@@ -4,12 +4,15 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"golang.org/x/net/publicsuffix"
 	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/http/cookiejar"
 	"net/http/httputil"
 	"net/url"
+	"os"
 	"strings"
 	"time"
 )
@@ -39,8 +42,21 @@ const (
 )
 
 func NewKeycloakClient(baseUrl, clientId, clientSecret, realm, username, password string, initialLogin bool) (*KeycloakClient, error) {
+	jar, err := cookiejar.New(&cookiejar.Options{PublicSuffixList: publicsuffix.List})
+
+	if err != nil {
+		return nil, err
+	}
+
+	c := os.Getenv("IGNORE_COOKIES")
+
+	if c != "" {
+		jar = nil
+	}
+
 	httpClient := &http.Client{
 		Timeout: time.Second * 5,
+		Jar:     jar,
 	}
 	clientCredentials := &ClientCredentials{
 		ClientId:     clientId,
