@@ -107,7 +107,7 @@ func resourceKeycloakIdentityProviderMapperRead(setDataFromIdentityProviderMappe
 		id := data.Id()
 		identityProvider, err := keycloakClient.GetIdentityProviderMapper(realm, alias, id)
 		if err != nil {
-			return handleNotFoundError(err, data)
+			return handleNotFoundError(err, data, "generic_keycloak_identity_provider_mapper")
 		}
 		if err = setDataFromIdentityProviderMapper(data, identityProvider); err != nil {
 			return err

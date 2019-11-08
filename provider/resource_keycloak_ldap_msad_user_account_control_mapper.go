@@ -87,7 +87,7 @@ func resourceKeycloakLdapMsadUserAccountControlMapperRead(data *schema.ResourceD
 
 	ldapMsadUserAccountControlMapper, err := keycloakClient.GetLdapMsadUserAccountControlMapper(realmId, id)
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "resource_keycloak_ldap_msad_user_account_control_mapper")
 	}
 
 	setLdapMsadUserAccountControlMapperData(data, ldapMsadUserAccountControlMapper)

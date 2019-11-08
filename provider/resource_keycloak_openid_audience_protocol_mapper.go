@@ -138,7 +138,7 @@ func resourceKeycloakOpenIdAudienceProtocolMapperRead(data *schema.ResourceData,
 
 	openIdAudienceMapper, err := keycloakClient.GetOpenIdAudienceProtocolMapper(realmId, clientId, clientScopeId, data.Id())
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "resource_keycloak_openid_audience_protocol_mapper")
 	}
 
 	mapFromOpenIdAudienceMapperToData(openIdAudienceMapper, data)

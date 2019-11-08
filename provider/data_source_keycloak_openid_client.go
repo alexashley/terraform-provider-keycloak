@@ -104,7 +104,7 @@ func dataSourceKeycloakOpenidClientRead(data *schema.ResourceData, meta interfac
 
 	client, err := keycloakClient.GetOpenidClientByClientId(realmId, clientId)
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "data_source_keycloak_openid_client")
 	}
 
 	err = setOpenidClientData(keycloakClient, data, client)

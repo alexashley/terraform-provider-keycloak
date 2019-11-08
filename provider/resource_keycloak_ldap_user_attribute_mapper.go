@@ -120,7 +120,7 @@ func resourceKeycloakLdapUserAttributeMapperRead(data *schema.ResourceData, meta
 
 	ldapUserAttributeMapper, err := keycloakClient.GetLdapUserAttributeMapper(realmId, id)
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "resource_keycloak_ldap_user_attribute_mapper")
 	}
 
 	setLdapUserAttributeMapperData(data, ldapUserAttributeMapper)

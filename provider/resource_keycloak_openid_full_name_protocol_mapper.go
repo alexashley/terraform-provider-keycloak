@@ -123,7 +123,7 @@ func resourceKeycloakOpenIdFullNameProtocolMapperRead(data *schema.ResourceData,
 
 	openIdFullNameMapper, err := keycloakClient.GetOpenIdFullNameProtocolMapper(realmId, clientId, clientScopeId, data.Id())
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "resource_keycloak_openid_full_name_protocol_mapper")
 	}
 
 	mapFromOpenIdFullNameMapperToData(openIdFullNameMapper, data)

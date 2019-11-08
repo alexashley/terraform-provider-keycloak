@@ -86,7 +86,7 @@ func resourceKeycloakGroupRead(data *schema.ResourceData, meta interface{}) erro
 
 	group, err := keycloakClient.GetGroup(realmId, id)
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "resource_keycloak_group")
 	}
 
 	mapFromGroupToData(data, group)

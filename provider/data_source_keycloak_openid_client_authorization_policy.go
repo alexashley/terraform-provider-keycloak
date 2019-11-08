@@ -81,7 +81,7 @@ func dataSourceKeycloakOpenidClientAuthorizationPolicyRead(data *schema.Resource
 
 	client, err := keycloakClient.GetClientAuthorizationPolicyByName(realmId, resourceServerId, name)
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "data_source_keycloak_openid_client_authorization_policy")
 	}
 
 	setOpenidClientAuthorizationPolicyData(data, client)

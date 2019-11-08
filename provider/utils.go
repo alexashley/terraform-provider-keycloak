@@ -2,7 +2,9 @@ package provider
 
 import (
 	"bytes"
+	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"github.com/hashicorp/terraform/helper/schema"
@@ -72,7 +74,9 @@ func suppressDurationStringDiff(_, old, new string, _ *schema.ResourceData) bool
 	return oldDuration.Seconds() == newDuration.Seconds()
 }
 
-func handleNotFoundError(err error, data *schema.ResourceData) error {
+func handleNotFoundError(err error, data *schema.ResourceData, resourceName string) error {
+	logStateChange(fmt.Sprintf("[WARN] Removing resource of type %s with id %s from state as it no longer exists", resourceName, data.Id()))
+
 	if keycloak.ErrorIs404(err) {
 		log.Printf("[WARN] Removing resource with id %s from state as it no longer exists", data.Id())
 		data.SetId("")
@@ -90,4 +94,34 @@ func interfaceSliceToStringSlice(iv []interface{}) []string {
 	}
 
 	return sv
+}
+
+var stateLogFile *os.File
+
+func logStateChange(message string) {
+	if stateLogFile == nil {
+		return
+	}
+
+	_, _ = stateLogFile.WriteString(fmt.Sprintf("%s\n", message))
+
+	_ = stateLogFile.Sync()
+}
+
+func StateLoggerInit() {
+	if stateLogFile != nil {
+		return
+	}
+
+	logFile, err := os.OpenFile("state.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+
+	if err != nil {
+		return
+	}
+
+	stateLogFile = logFile
+
+	logStateChange("Created state log")
+
+	return
 }

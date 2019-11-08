@@ -342,7 +342,7 @@ func resourceKeycloakSamlClientRead(data *schema.ResourceData, meta interface{})
 
 	client, err := keycloakClient.GetSamlClient(realmId, id)
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "resource_keycloak_saml_client")
 	}
 
 	err = mapToDataFromSamlClient(data, client)

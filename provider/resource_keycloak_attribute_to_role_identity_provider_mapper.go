@@ -54,7 +54,7 @@ func getAttributeToRoleIdentityProviderMapperFromData(data *schema.ResourceData,
 	rec, _ := getIdentityProviderMapperFromData(data)
 	identityProvider, err := keycloakClient.GetIdentityProvider(rec.Realm, rec.IdentityProviderAlias)
 	if err != nil {
-		return nil, handleNotFoundError(err, data)
+		return nil, handleNotFoundError(err, data, "resource_keycloak_attribute_to_role_identity_provider_mapper")
 	}
 	rec.IdentityProviderMapper = fmt.Sprintf("%s-role-idp-mapper", identityProvider.ProviderId)
 	rec.Config = &keycloak.IdentityProviderMapperConfig{

@@ -116,7 +116,7 @@ func resourceKeycloakRoleRead(data *schema.ResourceData, meta interface{}) error
 
 	role, err := keycloakClient.GetRole(realmId, id)
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "resource_keycloak_role")
 	}
 
 	mapFromRoleToData(data, role)

@@ -130,7 +130,7 @@ func dataSourceKeycloakRealmKeysRead(data *schema.ResourceData, meta interface{}
 
 	keys, err := keycloakClient.GetRealmKeys(realmId)
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "data_source_keycloak_realm_keys")
 	}
 
 	if filterStatus, ok := data.GetOkExists("status"); ok {

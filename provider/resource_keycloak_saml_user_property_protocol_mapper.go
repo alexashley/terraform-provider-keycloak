@@ -123,7 +123,7 @@ func resourceKeycloakSamlUserPropertyProtocolMapperRead(data *schema.ResourceDat
 
 	samlUserPropertyMapper, err := keycloakClient.GetSamlUserPropertyProtocolMapper(realmId, clientId, clientScopeId, data.Id())
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "resource_keycloak_saml_user_property_protocol_mapper")
 	}
 
 	mapFromSamlUserPropertyProtocolMapperToData(samlUserPropertyMapper, data)

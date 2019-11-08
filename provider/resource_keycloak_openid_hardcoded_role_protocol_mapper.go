@@ -108,7 +108,7 @@ func resourceKeycloakOpenIdHardcodedRoleProtocolMapperRead(data *schema.Resource
 
 	openIdHardcodedRoleMapper, err := keycloakClient.GetOpenIdHardcodedRoleProtocolMapper(realmId, clientId, clientScopeId, data.Id())
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "resource_keycloak_openid_hardcoded_role_protocol_mapper")
 	}
 
 	mapFromOpenIdHardcodedRoleMapperToData(openIdHardcodedRoleMapper, data)

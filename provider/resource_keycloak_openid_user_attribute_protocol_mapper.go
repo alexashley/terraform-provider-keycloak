@@ -155,7 +155,7 @@ func resourceKeycloakOpenIdUserAttributeProtocolMapperRead(data *schema.Resource
 
 	openIdUserAttributeMapper, err := keycloakClient.GetOpenIdUserAttributeProtocolMapper(realmId, clientId, clientScopeId, data.Id())
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "resource_keycloak_openid_user_attribute_protocol_mapper")
 	}
 
 	mapFromOpenIdUserAttributeMapperToData(openIdUserAttributeMapper, data)

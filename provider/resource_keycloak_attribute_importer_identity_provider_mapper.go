@@ -44,7 +44,7 @@ func getAttributeImporterIdentityProviderMapperFromData(data *schema.ResourceDat
 	rec, _ := getIdentityProviderMapperFromData(data)
 	identityProvider, err := keycloakClient.GetIdentityProvider(rec.Realm, rec.IdentityProviderAlias)
 	if err != nil {
-		return nil, handleNotFoundError(err, data)
+		return nil, handleNotFoundError(err, data, "resource_keycloak_attribute_importer_identity_provider_mapper")
 	}
 	rec.IdentityProviderMapper = fmt.Sprintf("%s-user-attribute-idp-mapper", identityProvider.ProviderId)
 	rec.Config = &keycloak.IdentityProviderMapperConfig{

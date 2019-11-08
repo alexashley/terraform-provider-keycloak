@@ -109,7 +109,7 @@ func resourceKeycloakGenericClientProtocolMapperRead(data *schema.ResourceData, 
 
 	resource, err := keycloakClient.GetGenericClientProtocolMapper(realmId, clientId, id)
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "resource_keycloak_generic_client_protocol_mapper")
 	}
 
 	setGenericClientProtocolMapperData(data, resource)

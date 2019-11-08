@@ -130,7 +130,7 @@ func resourceKeycloakCustomUserFederationRead(data *schema.ResourceData, meta in
 
 	custom, err := keycloakClient.GetCustomUserFederation(realmId, id)
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "resource_keycloak_custom_user_federation")
 	}
 
 	setCustomUserFederationData(data, custom)

@@ -130,7 +130,7 @@ func resourceKeycloakOpenidClientAuthorizationPermissionRead(data *schema.Resour
 
 	permission, err := keycloakClient.GetOpenidClientAuthorizationPermission(realmId, resourceServerId, id)
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "resource_keycloak_openid_client_authorization_permission")
 	}
 
 	setOpenidClientAuthorizationPermissionData(data, permission)

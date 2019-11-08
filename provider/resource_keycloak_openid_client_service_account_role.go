@@ -79,7 +79,7 @@ func resourceKeycloakOpenidClientServiceAccountRoleRead(data *schema.ResourceDat
 
 	serviceAccountRole, err := keycloakClient.GetOpenidClientServiceAccountRole(realmId, serviceAccountUserId, clientId, id)
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "resource_keycloak_openid_client_service_account")
 	}
 
 	setOpenidClientServiceAccountRoleData(data, serviceAccountRole)

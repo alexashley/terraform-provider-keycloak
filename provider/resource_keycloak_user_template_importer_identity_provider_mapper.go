@@ -27,7 +27,7 @@ func getUserTemplateImporterIdentityProviderMapperFromData(data *schema.Resource
 	rec, _ := getIdentityProviderMapperFromData(data)
 	identityProvider, err := keycloakClient.GetIdentityProvider(rec.Realm, rec.IdentityProviderAlias)
 	if err != nil {
-		return nil, handleNotFoundError(err, data)
+		return nil, handleNotFoundError(err, data, "resource_keycloak_user_template_importer_identity_provider_mapper")
 	}
 	rec.IdentityProviderMapper = fmt.Sprintf("%s-username-idp-mapper", identityProvider.ProviderId)
 	rec.Config = &keycloak.IdentityProviderMapperConfig{

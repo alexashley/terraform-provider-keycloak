@@ -760,7 +760,7 @@ func resourceKeycloakRealmRead(data *schema.ResourceData, meta interface{}) erro
 
 	realm, err := keycloakClient.GetRealm(data.Id())
 	if err != nil {
-		return handleNotFoundError(err, data)
+		return handleNotFoundError(err, data, "resource_keycloak_realm")
 	}
 
 	// we can't trust the API to set this field correctly since it just responds with "**********" this implies a 'password only' change will not detected

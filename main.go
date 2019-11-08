@@ -9,6 +9,8 @@ import (
 func main() {
 	plugin.Serve(&plugin.ServeOpts{
 		ProviderFunc: func() terraform.ResourceProvider {
+			provider.StateLoggerInit()
+
 			return provider.KeycloakProvider()
 		},
 	})
